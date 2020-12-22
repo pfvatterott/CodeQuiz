@@ -5,3 +5,12 @@
 .lead {
     text-align: center;
 }
+
+#topTimer {
+    text-align: right;
+    font-size: 25px;
+}
+
+li {
+    padding: 5px;
+}
