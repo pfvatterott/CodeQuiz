@@ -4,12 +4,14 @@ var mainEl = document.querySelector(".lead");
 var secondsLeft = 2;
 var headEl = document.querySelector(".display-4");
 var jumbo = document.querySelector(".jumbotron");
+var timerDisplay = document.getElementById("topTimer");
 var questions = document.querySelector(".questions");
 var answerList = document.querySelector("#fullList");
 var answer1 = document.getElementById("answer1");
 var answer2 = document.getElementById("answer2");
 var answer3 = document.getElementById("answer3");
 var answer4 = document.getElementById("answer4");
+var scoreBoard = document.getElementById("scoreBoard");
 
 
 //Hiding buttons
@@ -19,6 +21,7 @@ answer2.style.visibility = "hidden";
 answer3.style.visibility = "hidden";
 answer4.style.visibility = "hidden";
 questions.style.visibility = "hidden";
+scoreBoard.style.visibility = "hidden";
 
 //Array of Questions and Answers
 var questionArray = [
@@ -58,7 +61,6 @@ function firstTimer () {
 
 //Quiz
 var quizTimer = 60;
-var timerDisplay = document.getElementById("topTimer");
 playerScore = 0;
 function quiz() {
     var i = 0;
@@ -76,13 +78,21 @@ function quiz() {
         timerDisplay.textContent = quizTimer;
         if (quizTimer === 0) {
             clearInterval(timerInveral);
-            scoreBoard();
+            finalPage();
+        }
+        if (finalPage.called === true) {
+            clearInterval(timerInveral);
+            finalPage();
         }
     }, 1000)
     questionMaker(i)
 }
 
 function questionMaker(i) {
+    if (i === questionArray.length) {
+        finalPage();
+        return;
+    }
     console.log(playerScore);
     questions.textContent = questionArray[i].question;
     questions.style.fontSize = "20px";
@@ -134,10 +144,14 @@ function questionMaker(i) {
     });
 }
 
-//Scoreboard
-function scoreBoard() {
-    mainEl.textContent = "You ran out of time!";
-    mainEl.style.fontSize = "50px";
+//finalPage
+function finalPage() {
+    answerList.remove();
+    questions.remove();
+    timerDisplay.remove();
+    scoreBoard.style.visibility = "visible";
+    finalPage.called = true;
+    headEl.textContent = "You have finished the Quiz!";
 }
 
 start.addEventListener("click", firstTimer);

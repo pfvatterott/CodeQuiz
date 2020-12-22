@@ -11,6 +11,10 @@
     font-size: 25px;
 }
 
-li {
+#fullList li {
     padding: 5px;
+}
+
+.list-group-item {
+    display: list-item;
 }
