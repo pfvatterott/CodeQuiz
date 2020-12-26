@@ -12,6 +12,8 @@ var answer2 = document.getElementById("answer2");
 var answer3 = document.getElementById("answer3");
 var answer4 = document.getElementById("answer4");
 var scoreBoard = document.querySelector("#scoreBoard");
+var clearScores = document.querySelector(".clearButton");
+var restartQuiz = document.querySelector(".restartButton");
 
 
 //Hiding buttons
@@ -21,7 +23,9 @@ answer2.style.visibility = "hidden";
 answer3.style.visibility = "hidden";
 answer4.style.visibility = "hidden";
 questions.style.visibility = "hidden";
-// scoreBoard.style.visibility = "hidden";
+clearScores.style.visibility = "hidden";
+restartQuiz.style.visibility = "hidden";
+
 
 //Array of Questions and Answers
 var questionArray = [
@@ -149,16 +153,13 @@ function finalPage(finalScore) {
     questions.remove();
     timerDisplay.remove();
     scoreBoard.textContent = "High Scores:";
+    scoreBoard.style.fontSize = "20px";
     finalPage.called = true;
     headEl.style.visibility = "visible";
-    headEl.textContent = "You have finished the Quiz!";
-
-    //Pull local Storage adn Merge
+    headEl.textContent = "Nice Work!";
 
     //Setting to local storage
     var name = prompt("Nice work! Please enter your name to record your score.");
-    var a = [{key: name, score: finalScore}];
-    // localStorage.setItem("allScores", JSON.stringify(a));
     addToStorage(name, finalScore);
 
     return;
@@ -179,13 +180,31 @@ function addToStorage(name, finalScore) {
 function generateScoreboard() {
     var localScore = [];
     localScore = JSON.parse(localStorage.getItem("allScores"));
-    console.log(localScore.length);
     for (let i = 0; i < localScore.length; i++) {
         var li = document.createElement("li");
         li.textContent = ("User " + localScore[i].key + " with " + localScore[i].score + " points");
         li.setAttribute("data-index", i);
+        li.classList.add("list-group-item");
+        li.classList.add("list-group-item-action");
         scoreBoard.appendChild(li);
     }
+
+    //clear highscores
+    clearScores.style.visibility = "visible";
+    clearScores.textContent = "Clear Highscores";
+    clearScores.addEventListener("click", function() {
+        localStorage.clear();
+        scoreBoard.remove();
+        clearScores.remove();
+    });
+
+    //restart quiz
+    restartQuiz.style.visibility = "visible";
+    restartQuiz.textContent = "Restart Quiz";
+    restartQuiz.addEventListener("click", function() {
+        window.location.reload(false);
+    });
+
 }
 
 start.addEventListener("click", firstTimer);

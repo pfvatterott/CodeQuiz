@@ -15,10 +15,11 @@
     padding: 5px;
 }
 
-.list-group-item {
-    display: list-item;
+.clearButton {
+    margin-top: 30px;
+    margin-right: 10px;
 }
 
-.scores {
-    visibility: hidden;
+.restartButton {
+    margin-top: 30px;
 }
