@@ -18,3 +18,7 @@
 .list-group-item {
     display: list-item;
 }
+
+.scores {
+    visibility: hidden;
+}

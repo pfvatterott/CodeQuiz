@@ -60,7 +60,7 @@ function firstTimer () {
 }
 
 //Quiz
-var quizTimer = 60;
+var quizTimer = 10;
 playerScore = 0;
 function quiz() {
     var i = 0;
@@ -76,24 +76,24 @@ function quiz() {
         jumbo.style.paddingTop = "5px";
         quizTimer--;
         timerDisplay.textContent = quizTimer;
-        if (quizTimer === 0) {
+        console.log(i);
+        //determines when to call final page//
+        if (finalPage.called === true || quizTimer === 0 || finalQuestion === true) {
+            var finalScore = quizTimer + playerScore;
             clearInterval(timerInveral);
-            finalPage();
-        }
-        if (finalPage.called === true) {
-            clearInterval(timerInveral);
-            finalPage();
+            finalPage(finalScore);
+            return;
         }
     }, 1000)
     questionMaker(i)
 }
 
+var finalQuestion = false;
 function questionMaker(i) {
     if (i === questionArray.length) {
-        finalPage();
+        finalQuestion = true;
         return;
     }
-    console.log(playerScore);
     questions.textContent = questionArray[i].question;
     questions.style.fontSize = "20px";
     answer1.textContent = questionArray[i].answer1;
@@ -145,14 +145,22 @@ function questionMaker(i) {
 }
 
 //finalPage
-function finalPage() {
+function finalPage(finalScore) {
     answerList.remove();
     questions.remove();
     timerDisplay.remove();
     scoreBoard.style.visibility = "visible";
     finalPage.called = true;
+    headEl.style.visibility = "visible";
     headEl.textContent = "You have finished the Quiz!";
+
+    //local storage
+    var name = prompt("Nice work! Please enter your name to record your score.");
+    var a = ({key: name, score: finalScore});
+    localStorage.setItem("score", JSON.stringify(a));
+    var localScore = JSON.parse(localStorage.getItem("score"));
+    document.getElementById("score1").textContent = ("User " + localScore.key + " with " + localScore.score + " points");
+    return;
 }
 
 start.addEventListener("click", firstTimer);
-
