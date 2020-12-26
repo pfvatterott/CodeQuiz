@@ -11,7 +11,7 @@ var answer1 = document.getElementById("answer1");
 var answer2 = document.getElementById("answer2");
 var answer3 = document.getElementById("answer3");
 var answer4 = document.getElementById("answer4");
-var scoreBoard = document.getElementById("scoreBoard");
+var scoreBoard = document.querySelector("#scoreBoard");
 
 
 //Hiding buttons
@@ -21,7 +21,7 @@ answer2.style.visibility = "hidden";
 answer3.style.visibility = "hidden";
 answer4.style.visibility = "hidden";
 questions.style.visibility = "hidden";
-scoreBoard.style.visibility = "hidden";
+// scoreBoard.style.visibility = "hidden";
 
 //Array of Questions and Answers
 var questionArray = [
@@ -76,7 +76,6 @@ function quiz() {
         jumbo.style.paddingTop = "5px";
         quizTimer--;
         timerDisplay.textContent = quizTimer;
-        console.log(i);
         //determines when to call final page//
         if (finalPage.called === true || quizTimer === 0 || finalQuestion === true) {
             var finalScore = quizTimer + playerScore;
@@ -149,18 +148,44 @@ function finalPage(finalScore) {
     answerList.remove();
     questions.remove();
     timerDisplay.remove();
-    scoreBoard.style.visibility = "visible";
+    scoreBoard.textContent = "High Scores:";
     finalPage.called = true;
     headEl.style.visibility = "visible";
     headEl.textContent = "You have finished the Quiz!";
 
-    //local storage
+    //Pull local Storage adn Merge
+
+    //Setting to local storage
     var name = prompt("Nice work! Please enter your name to record your score.");
-    var a = ({key: name, score: finalScore});
-    localStorage.setItem("score", JSON.stringify(a));
-    var localScore = JSON.parse(localStorage.getItem("score"));
-    document.getElementById("score1").textContent = ("User " + localScore.key + " with " + localScore.score + " points");
+    var a = [{key: name, score: finalScore}];
+    // localStorage.setItem("allScores", JSON.stringify(a));
+    addToStorage(name, finalScore);
+
     return;
+}
+
+function addToStorage(name, finalScore) {
+    var localScore = JSON.parse(localStorage.getItem("allScores"));
+    if (localScore === null) {
+        localStorage.setItem("allScores", JSON.stringify([{key: name, score: finalScore}]))
+    }
+    else {
+        localScore.push({key: name, score: finalScore});
+        localStorage.setItem("allScores", JSON.stringify(localScore));
+    }
+    generateScoreboard();
+}
+
+function generateScoreboard() {
+    var localScore = [];
+    localScore = JSON.parse(localStorage.getItem("allScores"));
+    console.log(localScore.length);
+    for (let i = 0; i < localScore.length; i++) {
+        var li = document.createElement("li");
+        li.textContent = ("User " + localScore[i].key + " with " + localScore[i].score + " points");
+        li.setAttribute("data-index", i);
+        scoreBoard.appendChild(li);
+    }
 }
 
 start.addEventListener("click", firstTimer);
