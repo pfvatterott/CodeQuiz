@@ -1,4 +1,4 @@
-//Event listener for Start Quiz
+//DOM elements
 var start = document.querySelector("#startQuiz");
 var mainEl = document.querySelector(".lead");
 var secondsLeft = 2;
@@ -69,7 +69,7 @@ function firstTimer () {
     }, 1000);
 }
 
-//Quiz
+//Quiz formatting and timer
 var quizTimer = 10;
 playerScore = 0;
 function quiz() {
@@ -111,14 +111,15 @@ function questionMaker(i) {
     answer3.textContent = questionArray[i].answer3;
     answer4.textContent = questionArray[i].answer4;
 
-    answer1.addEventListener("click", function() {
+    //checks if clicked answer is correct
+    function answerCheck(answer, i) {
         if (answerResponseWrong.style.display === "block") {
             answerResponseWrong.style.display = "none";
         }
         if (answerResponseCorrect.style.display === "block") {
             answerResponseCorrect.style.display = "none";
         }
-        if (answer1.textContent === questionArray[i].correct) {
+        if (answer.textContent === questionArray[i].correct) {
             playerScore = playerScore + 3;
             i++;
             answerResponseCorrect.style.display = "block";
@@ -128,65 +129,27 @@ function questionMaker(i) {
             answerResponseWrong.style.display = "block";
             questionMaker(i);
         }
+    }
+
+    //event listener for answers
+    answer1.addEventListener("click", function() {
+        answerCheck(answer1, i)
     });
     answer2.addEventListener("click", function() {
-        if (answerResponseWrong.style.display === "block") {
-            answerResponseWrong.style.display = "none";
-        }
-        if (answerResponseCorrect.style.display === "block") {
-            answerResponseCorrect.style.display = "none";
-        }
-        if (answer2.textContent === questionArray[i].correct) {
-            playerScore = playerScore + 3;
-            i++;
-            answerResponseCorrect.style.display = "block";
-            questionMaker(i);
-        } else {
-            i++;
-            answerResponseWrong.style.display = "block";
-            questionMaker(i);
-        }
+       answerCheck(answer2, i)
     });
     answer3.addEventListener("click", function() {
-        if (answerResponseWrong.style.display === "block") {
-            answerResponseWrong.style.display = "none";
-        }
-        if (answerResponseCorrect.style.display === "block") {
-            answerResponseCorrect.style.display = "none";
-        }
-        if (answer3.textContent === questionArray[i].correct) {
-            playerScore = playerScore + 3;
-            i++;
-            answerResponseCorrect.style.display = "block";
-            questionMaker(i);
-        } else {
-            i++;
-            answerResponseWrong.style.display = "block";
-            questionMaker(i);
-        }
+       answerCheck(answer3, i)
     });
     answer4.addEventListener("click", function() {
-        if (answerResponseWrong.style.display === "block") {
-            answerResponseWrong.style.display = "none";
-        }
-        if (answerResponseCorrect.style.display === "block") {
-            answerResponseCorrect.style.display = "none";
-        }
-        if (answer4.textContent === questionArray[i].correct) {
-            playerScore = playerScore + 3;
-            i++;
-            answerResponseCorrect.style.display = "block";
-            questionMaker(i);
-        } else {
-            i++;
-            answerResponseWrong.style.display = "block";
-            questionMaker(i);
-        }
+        answerCheck(answer4, i)
     });
 }
 
 //finalPage
 function finalPage(finalScore) {
+    
+    //general formatting
     answerList.remove();
     questions.remove();
     timerDisplay.remove();
@@ -209,6 +172,7 @@ function finalPage(finalScore) {
     return;
 }
 
+//adds to storage then generates scoreboard
 function addToStorage(name, finalScore) {
     var localScore = JSON.parse(localStorage.getItem("allScores"));
     if (localScore === null) {
@@ -221,6 +185,7 @@ function addToStorage(name, finalScore) {
     generateScoreboard();
 }
 
+//generate scoreboard function
 function generateScoreboard() {
     var localScore = [];
     localScore = JSON.parse(localStorage.getItem("allScores"));
