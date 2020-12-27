@@ -14,6 +14,9 @@ var answer4 = document.getElementById("answer4");
 var scoreBoard = document.querySelector("#scoreBoard");
 var clearScores = document.querySelector(".clearButton");
 var restartQuiz = document.querySelector(".restartButton");
+var answerResponseCorrect = document.querySelector(".answerResponseCorrect");
+var answerResponseWrong = document.querySelector(".answerResponseWrong");
+var underAnswerLine = document.querySelector(".underAnswerLine");
 
 
 //Hiding buttons
@@ -25,6 +28,9 @@ answer4.style.visibility = "hidden";
 questions.style.visibility = "hidden";
 clearScores.style.visibility = "hidden";
 restartQuiz.style.visibility = "hidden";
+answerResponseCorrect.style.display = "none";
+answerResponseWrong.style.display = "none";
+underAnswerLine.style.display = "none";
 
 
 //Array of Questions and Answers
@@ -75,11 +81,12 @@ function quiz() {
         answer4.style.visibility = "visible";
         answerList.style.visibility = "visible";
         questions.style.visibility = "visible";
+        underAnswerLine.style.display = "block";
         mainEl.textContent = "";
         headEl.textContent = "";
         jumbo.style.paddingTop = "5px";
         quizTimer--;
-        timerDisplay.textContent = quizTimer;
+        timerDisplay.textContent = ("Time: " + quizTimer);
         //determines when to call final page//
         if (finalPage.called === true || quizTimer === 0 || finalQuestion === true) {
             var finalScore = quizTimer + playerScore;
@@ -105,43 +112,74 @@ function questionMaker(i) {
     answer4.textContent = questionArray[i].answer4;
 
     answer1.addEventListener("click", function() {
+        if (answerResponseWrong.style.display === "block") {
+            answerResponseWrong.style.display = "none";
+        }
+        if (answerResponseCorrect.style.display === "block") {
+            answerResponseCorrect.style.display = "none";
+        }
         if (answer1.textContent === questionArray[i].correct) {
             playerScore = playerScore + 3;
             i++;
+            answerResponseCorrect.style.display = "block";
             questionMaker(i);
         } else {
             i++;
+            answerResponseWrong.style.display = "block";
             questionMaker(i);
         }
-
     });
     answer2.addEventListener("click", function() {
+        if (answerResponseWrong.style.display === "block") {
+            answerResponseWrong.style.display = "none";
+        }
+        if (answerResponseCorrect.style.display === "block") {
+            answerResponseCorrect.style.display = "none";
+        }
         if (answer2.textContent === questionArray[i].correct) {
             playerScore = playerScore + 3;
             i++;
+            answerResponseCorrect.style.display = "block";
             questionMaker(i);
         } else {
             i++;
+            answerResponseWrong.style.display = "block";
             questionMaker(i);
         }
     });
     answer3.addEventListener("click", function() {
+        if (answerResponseWrong.style.display === "block") {
+            answerResponseWrong.style.display = "none";
+        }
+        if (answerResponseCorrect.style.display === "block") {
+            answerResponseCorrect.style.display = "none";
+        }
         if (answer3.textContent === questionArray[i].correct) {
             playerScore = playerScore + 3;
             i++;
+            answerResponseCorrect.style.display = "block";
             questionMaker(i);
         } else {
             i++;
+            answerResponseWrong.style.display = "block";
             questionMaker(i);
         }
     });
     answer4.addEventListener("click", function() {
+        if (answerResponseWrong.style.display === "block") {
+            answerResponseWrong.style.display = "none";
+        }
+        if (answerResponseCorrect.style.display === "block") {
+            answerResponseCorrect.style.display = "none";
+        }
         if (answer4.textContent === questionArray[i].correct) {
             playerScore = playerScore + 3;
             i++;
+            answerResponseCorrect.style.display = "block";
             questionMaker(i);
         } else {
             i++;
+            answerResponseWrong.style.display = "block";
             questionMaker(i);
         }
     });
@@ -152,6 +190,13 @@ function finalPage(finalScore) {
     answerList.remove();
     questions.remove();
     timerDisplay.remove();
+    underAnswerLine.remove();
+    if (answerResponseWrong.style.display === "block") {
+        answerResponseWrong.style.display = "none";
+    }
+    if (answerResponseCorrect.style.display === "block") {
+        answerResponseCorrect.style.display = "none";
+    }
     scoreBoard.textContent = "High Scores:";
     scoreBoard.style.fontSize = "20px";
     finalPage.called = true;
@@ -161,7 +206,6 @@ function finalPage(finalScore) {
     //Setting to local storage
     var name = prompt("Nice work! Please enter your name to record your score.");
     addToStorage(name, finalScore);
-
     return;
 }
 
@@ -189,7 +233,7 @@ function generateScoreboard() {
         scoreBoard.appendChild(li);
     }
 
-    //clear highscores
+    //clear highscores button
     clearScores.style.visibility = "visible";
     clearScores.textContent = "Clear Highscores";
     clearScores.addEventListener("click", function() {
@@ -198,7 +242,7 @@ function generateScoreboard() {
         clearScores.remove();
     });
 
-    //restart quiz
+    //restart quiz button
     restartQuiz.style.visibility = "visible";
     restartQuiz.textContent = "Restart Quiz";
     restartQuiz.addEventListener("click", function() {
