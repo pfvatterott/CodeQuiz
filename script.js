@@ -61,10 +61,10 @@ var questionArray = [
     },
     {
         question: "Question 4: What are the types of pop up boxes in Javascript?",
-        answer1: "All of the above",
+        answer1: "Alert",
         answer2: "Prompt",
         answer3: "Confirm",
-        answer4: "Alert",
+        answer4: "All of the above",
         correct: "All of the above"
     },
     {
