@@ -7,10 +7,10 @@ var jumbo = document.querySelector(".jumbotron");
 var timerDisplay = document.getElementById("topTimer");
 var questions = document.querySelector(".questions");
 var answerList = document.querySelector("#fullList");
-var answer1 = document.getElementById("answer1");
-var answer2 = document.getElementById("answer2");
-var answer3 = document.getElementById("answer3");
-var answer4 = document.getElementById("answer4");
+var answerbox1 = document.getElementById("answer1");
+var answerbox2 = document.getElementById("answer2");
+var answerbox3 = document.getElementById("answer3");
+var answerbox4 = document.getElementById("answer4");
 var scoreBoard = document.querySelector("#scoreBoard");
 var clearScores = document.querySelector(".clearButton");
 var restartQuiz = document.querySelector(".restartButton");
@@ -36,20 +36,60 @@ underAnswerLine.style.display = "none";
 //Array of Questions and Answers
 var questionArray = [
     {
-        question: "Question 1: What is my name?",
-        answer1: "John",
-        answer2: "Paul",
-        answer3: "Jacob",
-        answer4: "Ball",
-        correct: "Paul"
+        question: "Question 1: Where in your HTML do you link to your JavaScript file?",
+        answer1: "In the head",
+        answer2: "In the footer",
+        answer3: "At the end of the body",
+        answer4: "When you link your CSS file",
+        correct: "At the end of the body"
     },
     {
-        question: "Question 2: What is my last name?",
-        answer1: "Johnson",
-        answer2: "Muller",
-        answer3: "Jackson",
-        answer4: "Vatterott",
-        correct: "Vatterott"
+        question: "Question 2: Which of the following is not a JavaScript Data Type?",
+        answer1: "Undefined",
+        answer2: "Number",
+        answer3: "Boolean",
+        answer4: "Float",
+        correct: "Float"
+    },
+    {
+        question: "Question 3: Inside which HTML element do we put the JavaScript?",
+        answer1: "<script>",
+        answer2: "<head>",
+        answer3: "<meta>",
+        answer4: "<style>",
+        correct: "<script>"
+    },
+    {
+        question: "Question 4: What are the types of pop up boxes in Javascript?",
+        answer1: "All of the above",
+        answer2: "Prompt",
+        answer3: "Confirm",
+        answer4: "Alert",
+        correct: "All of the above"
+    },
+    {
+        question: "Question 4: What are the types of pop up boxes in Javascript?",
+        answer1: "asdgasdf",
+        answer2: "hi there",
+        answer3: "basdghaf",
+        answer4: "hdsadfasdf",
+        correct: "hi there"
+    },
+    {
+        question: "Question 5: Which of the following method checks if its argument is not a number?",
+        answer1: "isNaN()",
+        answer2: "nonNaN()",
+        answer3: "NaN()",
+        answer4: "None of the above",
+        correct: "isNaN()"
+    },
+    {
+        question: "Question 6: How would you write 'hello world' inside of an alert box?",
+        answer1: "msgBox('hello world')",
+        answer2: "alertBox('hello world')",
+        answer3: "msg('hello world')",
+        answer4: "alert('hello world')",
+        correct: "alert('hello world')"
     }
 ]
 
@@ -64,21 +104,21 @@ function firstTimer () {
 
         if(secondsLeft === 0) {
             clearInterval(timerInterval);
-            quiz();
+            quiz(i);
         }
     }, 1000);
 }
 
 //Quiz formatting and timer
-var quizTimer = 10;
-playerScore = 0;
-function quiz() {
-    var i = 0;
+var quizTimer = 60;
+var playerScore = 0;
+var i = 0;
+function quiz(i) {
     var timerInveral = setInterval(function() {
-        answer1.style.visibility = "visible";
-        answer2.style.visibility = "visible";
-        answer3.style.visibility = "visible";
-        answer4.style.visibility = "visible";
+        answerbox1.style.visibility = "visible";
+        answerbox2.style.visibility = "visible";
+        answerbox3.style.visibility = "visible";
+        answerbox4.style.visibility = "visible";
         answerList.style.visibility = "visible";
         questions.style.visibility = "visible";
         underAnswerLine.style.display = "block";
@@ -87,7 +127,8 @@ function quiz() {
         jumbo.style.paddingTop = "5px";
         quizTimer--;
         timerDisplay.textContent = ("Time: " + quizTimer);
-        //determines when to call final page//
+
+        //determines when to call final page
         if (finalPage.called === true || quizTimer === 0 || finalQuestion === true) {
             var finalScore = quizTimer + playerScore;
             clearInterval(timerInveral);
@@ -95,9 +136,10 @@ function quiz() {
             return;
         }
     }, 1000)
-    questionMaker(i)
+    questionMaker(i);
 }
 
+//generates the qustions and answers
 var finalQuestion = false;
 function questionMaker(i) {
     if (i === questionArray.length) {
@@ -106,44 +148,54 @@ function questionMaker(i) {
     }
     questions.textContent = questionArray[i].question;
     questions.style.fontSize = "20px";
-    answer1.textContent = questionArray[i].answer1;
-    answer2.textContent = questionArray[i].answer2;
-    answer3.textContent = questionArray[i].answer3;
-    answer4.textContent = questionArray[i].answer4;
+    answerbox1.textContent = questionArray[i].answer1;
+    answerbox2.textContent = questionArray[i].answer2;
+    answerbox3.textContent = questionArray[i].answer3;
+    answerbox4.textContent = questionArray[i].answer4;
 
-    //checks if clicked answer is correct
-    function answerCheck(answer, i) {
+    //event listener for answers
+    answerbox1.addEventListener("click", function() {
+        answerCheck(answerbox1, i);
+    });
+    answerbox2.addEventListener("click", function() {
+        answerCheck(answerbox2, i);
+    });
+    answerbox3.addEventListener("click", function() {
+        answerCheck(answerbox3, i);
+    });
+    answerbox4.addEventListener("click", function() {
+        answerCheck(answerbox4, i);
+    });
+}
+
+//checks if clicked answer is correct
+var iterationChecker = 0;    //prevents i from iterating backwards
+function answerCheck(answer, i) {
+    if (iterationChecker === i) {
         if (answerResponseWrong.style.display === "block") {
             answerResponseWrong.style.display = "none";
         }
-        if (answerResponseCorrect.style.display === "block") {
+        else if (answerResponseCorrect.style.display === "block") {
             answerResponseCorrect.style.display = "none";
-        }
+        };
         if (answer.textContent === questionArray[i].correct) {
             playerScore = playerScore + 3;
             i++;
+            iterationChecker++;
+            console.log("RIGHT " + playerScore);
+            console.log("RIGHT i is " + i);
             answerResponseCorrect.style.display = "block";
-            questionMaker(i);
-        } else {
-            i++;
-            answerResponseWrong.style.display = "block";
-            questionMaker(i);
+            return questionMaker(i);
         }
+        else {
+            i++;
+            iterationChecker++;
+            console.log("WRONG " + playerScore);
+            console.log("WRONG i is " + i);
+            answerResponseWrong.style.display = "block";
+            return questionMaker(i);
+        };
     }
-
-    //event listener for answers
-    answer1.addEventListener("click", function() {
-        answerCheck(answer1, i)
-    });
-    answer2.addEventListener("click", function() {
-       answerCheck(answer2, i)
-    });
-    answer3.addEventListener("click", function() {
-       answerCheck(answer3, i)
-    });
-    answer4.addEventListener("click", function() {
-        answerCheck(answer4, i)
-    });
 }
 
 //finalPage
