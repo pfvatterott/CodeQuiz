@@ -267,7 +267,7 @@ function generateScoreboard() {
     localOrderedScore = localScore.sort(function(a, b){return (b.score - a.score)});
     for (let i = 0; i < localOrderedScore.length; i++) {
         var li = document.createElement("li");
-        li.textContent = ("User " + localOrderedScore[i].key + " with " + localOrderedScore[i].score + " points");
+        li.textContent = ((i + 1) + ". User " + localOrderedScore[i].key + " with " + localOrderedScore[i].score + " points");
         li.setAttribute("data-index", i);
         li.classList.add("list-group-item");
         li.classList.add("list-group-item-action");
@@ -291,6 +291,8 @@ function generateScoreboard() {
     });
 }
 
+
+//Scoreboard generated when viewHighScores button is clicked
 function viewHighScoresButton() {
     start.remove();
     mainEl.textContent = "";
