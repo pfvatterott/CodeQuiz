@@ -1,6 +1,6 @@
 ![Logo of the project](assets/images/MyPost.png)
 
-# Password Generator  
+# Code Quiz 
 
 ## Description
 
