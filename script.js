@@ -19,7 +19,6 @@ var answerResponseCorrect = document.querySelector(".answerResponseCorrect");
 var answerResponseWrong = document.querySelector(".answerResponseWrong");
 var underAnswerLine = document.querySelector(".underAnswerLine");
 
-
 //Hiding buttons
 answerList.style.visibility = "hidden";
 answer1.style.visibility = "hidden";
@@ -32,6 +31,10 @@ restartQuiz.style.visibility = "hidden";
 answerResponseCorrect.style.display = "none";
 answerResponseWrong.style.display = "none";
 underAnswerLine.style.display = "none";
+
+//first page event listeners
+start.addEventListener("click", firstTimer);
+viewHighScores.addEventListener("click", viewHighScoresButton);
 
 
 //Array of Questions and Answers
@@ -240,7 +243,7 @@ function finalPage(finalScore) {
     headEl.textContent = "Nice Work!";
 
     //Setting to local storage
-    var name = prompt("Nice work! Please enter your name to record your score.");
+    var name = prompt("Nice work! You earned a score of " + finalScore+ "! Please enter your name to record your score.");
     addToStorage(name, finalScore);
     return;
 }
@@ -343,7 +346,3 @@ function viewHighScoresButton() {
         window.location.reload(false);
     });
 }
-
-//first page event listeners
-start.addEventListener("click", firstTimer);
-viewHighScores.addEventListener("click", viewHighScoresButton);
