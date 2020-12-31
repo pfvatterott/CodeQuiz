@@ -68,15 +68,15 @@ var questionArray = [
         correct: "All of the above"
     },
     {
-        question: "Question 4: What are the types of pop up boxes in Javascript?",
-        answer1: "asdgasdf",
-        answer2: "hi there",
-        answer3: "basdghaf",
-        answer4: "hdsadfasdf",
-        correct: "hi there"
+        question: "Question 5: How do you write an IF statement in JS?",
+        answer1: "if (i === 5)",
+        answer2: "if i === 5 then",
+        answer3: "if i = 5 then",
+        answer4: "if i = 5",
+        correct: "if (i === 5)"
     },
     {
-        question: "Question 5: Which of the following method checks if its argument is not a number?",
+        question: "Question 6: Which of the following method checks if its argument is not a number?",
         answer1: "isNaN()",
         answer2: "nonNaN()",
         answer3: "NaN()",
@@ -84,12 +84,36 @@ var questionArray = [
         correct: "isNaN()"
     },
     {
-        question: "Question 6: How would you write 'hello world' inside of an alert box?",
+        question: "Question 7: How would you write 'hello world' inside of an alert box?",
         answer1: "msgBox('hello world')",
         answer2: "alertBox('hello world')",
         answer3: "msg('hello world')",
         answer4: "alert('hello world')",
         correct: "alert('hello world')"
+    },
+    {
+        question: "Question 8: How does a FOR loop start?",
+        answer1: "for i = 1 to 5",
+        answer2: "for (i <= 5; i++)",
+        answer3: "for (i = 0; i <= 5; i++)",
+        answer4: "for (i = 0; i <= 5)",
+        correct: "for (i = 0; i <= 5; i++)"
+    },
+    {
+        question: "Question 9: What is the correct way to write a JavaScript array?",
+        answer1: "var colors = ['red', 'green', 'blue']",
+        answer2: "var colors = 'red', 'green, 'blue'",
+        answer3: "var colors = (1:'red', 2:'green', 3:'blue')",
+        answer4: "var colors = {'red', 'green', 'blue'}",
+        correct: "var colors = ['red', 'green', 'blue']"
+    },
+    {
+        question: "Question 10: How do you find the number with the highest value of x and y?",
+        answer1: "top(x,y)",
+        answer2: "Math.max(x,y)",
+        answer3: "ceil(x,y)",
+        answer4: "Math.ceil(x,y)",
+        correct: "Math.max(x,y)"
     }
 ]
 
@@ -182,16 +206,12 @@ function answerCheck(answer, i) {
             playerScore = playerScore + 3;
             i++;
             iterationChecker++;
-            console.log("RIGHT " + playerScore);
-            console.log("RIGHT i is " + i);
             answerResponseCorrect.style.display = "block";
             return questionMaker(i);
         }
         else {
             i++;
             iterationChecker++;
-            console.log("WRONG " + playerScore);
-            console.log("WRONG i is " + i);
             answerResponseWrong.style.display = "block";
             return questionMaker(i);
         };
@@ -240,10 +260,13 @@ function addToStorage(name, finalScore) {
 //generate scoreboard function
 function generateScoreboard() {
     var localScore = [];
+    var localOrderedScore = [];
     localScore = JSON.parse(localStorage.getItem("allScores"));
-    for (let i = 0; i < localScore.length; i++) {
+    localOrderedScore = localScore.sort(function(a, b){return (b.score - a.score)}); //sorts score into descending order
+    console.log(localOrderedScore);
+    for (let i = 0; i < localOrderedScore.length; i++) {
         var li = document.createElement("li");
-        li.textContent = ("User " + localScore[i].key + " with " + localScore[i].score + " points");
+        li.textContent = ("User " + localOrderedScore[i].key + " with " + localOrderedScore[i].score + " points");
         li.setAttribute("data-index", i);
         li.classList.add("list-group-item");
         li.classList.add("list-group-item-action");
@@ -254,7 +277,7 @@ function generateScoreboard() {
     clearScores.style.visibility = "visible";
     clearScores.textContent = "Clear Highscores";
     clearScores.addEventListener("click", function() {
-        localStorage.clear();
+        localOrderedStorage.clear();
         scoreBoard.remove();
         clearScores.remove();
     });

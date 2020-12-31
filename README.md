@@ -14,6 +14,7 @@ Here are some key features:
 4. When the user selects an answer the program will alert the user if it was correct or incorrect.
 5. A final score that is a combination of the correct amount of answers (each is worth 3 points) and the time remaining.
 6. A scoreboard that auto generates based on the amount of saved scores in local storage.
+7. A scoreboard that orders the scores from highest to lowest.
 7. A button that will clear all highscores.
 8. A button that will restart the quiz.
 
