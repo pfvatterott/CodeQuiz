@@ -5,6 +5,7 @@ var secondsLeft = 2;
 var headEl = document.querySelector(".display-4");
 var jumbo = document.querySelector(".jumbotron");
 var timerDisplay = document.getElementById("topTimer");
+var viewHighScores = document.getElementById("viewHighScores");
 var questions = document.querySelector(".questions");
 var answerList = document.querySelector("#fullList");
 var answerbox1 = document.getElementById("answer1");
@@ -203,7 +204,7 @@ function answerCheck(answer, i) {
             answerResponseCorrect.style.display = "none";
         };
         if (answer.textContent === questionArray[i].correct) {
-            playerScore = playerScore + 3;
+            playerScore = playerScore + 10;
             i++;
             iterationChecker++;
             answerResponseCorrect.style.display = "block";
@@ -262,8 +263,8 @@ function generateScoreboard() {
     var localScore = [];
     var localOrderedScore = [];
     localScore = JSON.parse(localStorage.getItem("allScores"));
-    localOrderedScore = localScore.sort(function(a, b){return (b.score - a.score)}); //sorts score into descending order
-    console.log(localOrderedScore);
+    //sorts score into descending order
+    localOrderedScore = localScore.sort(function(a, b){return (b.score - a.score)});
     for (let i = 0; i < localOrderedScore.length; i++) {
         var li = document.createElement("li");
         li.textContent = ("User " + localOrderedScore[i].key + " with " + localOrderedScore[i].score + " points");
@@ -277,7 +278,7 @@ function generateScoreboard() {
     clearScores.style.visibility = "visible";
     clearScores.textContent = "Clear Highscores";
     clearScores.addEventListener("click", function() {
-        localOrderedStorage.clear();
+        localStorage.clear();
         scoreBoard.remove();
         clearScores.remove();
     });
@@ -288,7 +289,59 @@ function generateScoreboard() {
     restartQuiz.addEventListener("click", function() {
         window.location.reload(false);
     });
-
 }
 
+function viewHighScoresButton() {
+    start.remove();
+    mainEl.textContent = "";
+    headEl.textContent = "";
+    answerList.remove();
+    questions.remove();
+    timerDisplay.remove();
+    underAnswerLine.remove();
+    if (answerResponseWrong.style.display === "block") {
+        answerResponseWrong.style.display = "none";
+    }
+    if (answerResponseCorrect.style.display === "block") {
+        answerResponseCorrect.style.display = "none";
+    }
+    scoreBoard.textContent = "High Scores:";
+    scoreBoard.style.fontSize = "20px";
+    finalPage.called = true;
+    headEl.style.visibility = "visible";
+    headEl.textContent = "The All-Time Greatest";
+
+    var localScore = [];
+    var localOrderedScore = [];
+    localScore = JSON.parse(localStorage.getItem("allScores"));
+    //sorts score into descending order
+    localOrderedScore = localScore.sort(function(a, b){return (b.score - a.score)});
+    for (let i = 0; i < localOrderedScore.length; i++) {
+        var li = document.createElement("li");
+        li.textContent = ("User " + localOrderedScore[i].key + " with " + localOrderedScore[i].score + " points");
+        li.setAttribute("data-index", i);
+        li.classList.add("list-group-item");
+        li.classList.add("list-group-item-action");
+        scoreBoard.appendChild(li);
+    }
+
+    //clear highscores button
+    clearScores.style.visibility = "visible";
+    clearScores.textContent = "Clear Highscores";
+    clearScores.addEventListener("click", function() {
+        localStorage.clear();
+        scoreBoard.remove();
+        clearScores.remove();
+    });
+
+    //restart quiz button
+    restartQuiz.style.visibility = "visible";
+    restartQuiz.textContent = "Restart Quiz";
+    restartQuiz.addEventListener("click", function() {
+        window.location.reload(false);
+    });
+}
+
+//first page event listeners
 start.addEventListener("click", firstTimer);
+viewHighScores.addEventListener("click", viewHighScoresButton);

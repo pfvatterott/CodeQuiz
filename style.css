@@ -1,5 +1,11 @@
+.jumbotron {
+    padding-top: 10px;
+}
+
+
 .display-4 {
     text-align: center;
+    padding-top: 50px;
 }
 
 .lead {
@@ -8,7 +14,9 @@
 
 #topTimer {
     text-align: right;
-    font-size: 25px;
+    font-size: 20px;
+    color: purple;
+    float: right;
 }
 
 #fullList li {
@@ -22,4 +30,12 @@
 
 .restartButton {
     margin-top: 30px;
+}
+
+#viewHighScores {
+    position: fixed;
+    text-align: left;
+    color: purple;
+    font-size: 20px;
+    padding-bottom: 50px;
 }
