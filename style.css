@@ -43,3 +43,13 @@
 #viewHighScores:hover {
     color: plum;
 }
+
+.answerResponseCorrect {
+    color: green;
+    font-size: 20px;
+}
+
+.answerResponseWrong {
+    color: red;
+    font-size: 20px;
+}

@@ -1,52 +1,62 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <title>Title</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+<head>
+  <title>Title</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
 </head>
-  <body>
-    <div class="container-fluid">
-      <div class="jumbotron">
-        <header>
-          <h2 id="topTimer"></h2>
-          <h2 id="viewHighScores">View HighScores</h2>
-        </header>
-        <h1 class="display-4">Let's Take A Quiz!</h1>
-        <p class="lead">There are 10 questions and a 60 second time limit. A correct answer is worth 10 points and all leftover time will be added to your score</p>
-        <!-- <hr class="my-4"> -->
-        <p class="lead">
-          <button id="startQuiz" type="button" class="btn btn-primary">Start Quiz</button>
-          <p class="questions"></p>
-          <ol id="fullList">
-            <li><button id="answer1" type="button" class="btn btn-primary"></button></li>
-            <li><button id="answer2" type="button" class="btn btn-primary"></button></li>
-            <li><button id="answer3" type="button" class="btn btn-primary"></button></li>
-            <li><button id="answer4" type="button" class="btn btn-primary"></button></li>
-          </ol>
-        </p>
-        <hr class="my-4 underAnswerLine">
-        <div class="answerResponseCorrect">Correct!</div>
-        <div class="answerResponseWrong">Wrong!</div>
-        <ol class="list-group" id="scoreBoard"></ol>
-        <div class="clearButton btn btn-primary">Clear Highscores</div>
-        <div class="restartButton btn btn-primary">Restart Quiz</div>
+
+<body>
+  <div class="container-fluid">
+    <div class="jumbotron">
+      <header>
+        <h2 id="topTimer"></h2>
+        <h2 id="viewHighScores">View HighScores</h2>
+      </header>
+      <h1 class="display-4">Let's Take A Quiz!</h1>
+      <p class="lead">There are 10 questions and a 60 second time limit. A correct answer is worth 10 points and all
+        leftover time will be added to your score</p>
+      <p class="lead">
+        <button id="startQuiz" type="button" class="btn btn-primary">Start Quiz</button>
+      <p class="questions"></p>
+      <ol id="fullList">
+        <li><button id="answer1" type="button" class="btn btn-primary"></button></li>
+        <li><button id="answer2" type="button" class="btn btn-primary"></button></li>
+        <li><button id="answer3" type="button" class="btn btn-primary"></button></li>
+        <li><button id="answer4" type="button" class="btn btn-primary"></button></li>
+      </ol>
+      </p>
+      <hr class="my-4 underAnswerLine">
+      <div class="answerResponseCorrect">Correct!</div>
+      <div class="answerResponseWrong">Wrong!</div>
+      <ol class="list-group" id="scoreBoard"></ol>
+      <div class="clearButton btn btn-primary">Clear Highscores</div>
+      <div class="restartButton btn btn-primary">Restart Quiz</div>
 
 
-      </div>
-        
     </div>
-  
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="script.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
+
+  </div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="script.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+</body>
+
 </html>

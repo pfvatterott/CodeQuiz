@@ -1,7 +1,7 @@
 //DOM elements
 var start = document.querySelector("#startQuiz");
 var mainEl = document.querySelector(".lead");
-var secondsLeft = 2;
+var secondsLeft = 3;
 var headEl = document.querySelector(".display-4");
 var jumbo = document.querySelector(".jumbotron");
 var timerDisplay = document.getElementById("topTimer");
@@ -122,15 +122,15 @@ var questionArray = [
 ]
 
 //Start Quiz Timer
-function firstTimer () {
-    var timerInterval = setInterval(function() {
+function firstTimer() {
+    var timerInterval = setInterval(function () {
         secondsLeft--;
         mainEl.textContent = secondsLeft;
         mainEl.style.fontSize = "250px";
         headEl.textContent = "Starting in...";
         start.style.visibility = "hidden";
 
-        if(secondsLeft === 0) {
+        if (secondsLeft === 0) {
             clearInterval(timerInterval);
             quiz(i);
         }
@@ -142,7 +142,7 @@ var quizTimer = 60;
 var playerScore = 0;
 var i = 0;
 function quiz(i) {
-    var timerInveral = setInterval(function() {
+    var timerInveral = setInterval(function () {
         answerbox1.style.visibility = "visible";
         answerbox2.style.visibility = "visible";
         answerbox3.style.visibility = "visible";
@@ -154,7 +154,7 @@ function quiz(i) {
         headEl.textContent = "";
         jumbo.style.paddingTop = "5px";
         quizTimer--;
-        timerDisplay.textContent = ("Time: " + quizTimer);
+        timerDisplay.textContent = ("Score: " + playerScore + "   Time: " + quizTimer);
 
         //determines when to call final page
         if (finalPage.called === true || quizTimer === 0 || finalQuestion === true) {
@@ -182,22 +182,22 @@ function questionMaker(i) {
     answerbox4.textContent = questionArray[i].answer4;
 
     //event listener for answers
-    answerbox1.addEventListener("click", function() {
+    answerbox1.addEventListener("click", function () {
         answerCheck(answerbox1, i);
     });
-    answerbox2.addEventListener("click", function() {
+    answerbox2.addEventListener("click", function () {
         answerCheck(answerbox2, i);
     });
-    answerbox3.addEventListener("click", function() {
+    answerbox3.addEventListener("click", function () {
         answerCheck(answerbox3, i);
     });
-    answerbox4.addEventListener("click", function() {
+    answerbox4.addEventListener("click", function () {
         answerCheck(answerbox4, i);
     });
 }
 
 //checks if clicked answer is correct
-var iterationChecker = 0;    //prevents i from iterating backwards
+var iterationChecker = 0;    //prevents i from iterating backwards bug
 function answerCheck(answer, i) {
     if (iterationChecker === i) {
         if (answerResponseWrong.style.display === "block") {
@@ -224,7 +224,7 @@ function answerCheck(answer, i) {
 
 //finalPage
 function finalPage(finalScore) {
-    
+
     //general formatting
     answerList.remove();
     questions.remove();
@@ -243,7 +243,10 @@ function finalPage(finalScore) {
     headEl.textContent = "Nice Work!";
 
     //Setting to local storage
-    var name = prompt("Nice work! You earned a score of " + finalScore+ "! Please enter your name to record your score.");
+    var name = prompt("Nice work! You earned a score of " + finalScore + "! Please enter your name to record your score.");
+    if (name === "") {
+        name = prompt("Nice work! You earned a score of " + finalScore + "! Please enter your name to record your score.");
+    }
     addToStorage(name, finalScore);
     return;
 }
@@ -252,10 +255,10 @@ function finalPage(finalScore) {
 function addToStorage(name, finalScore) {
     var localScore = JSON.parse(localStorage.getItem("allScores"));
     if (localScore === null) {
-        localStorage.setItem("allScores", JSON.stringify([{key: name, score: finalScore}]))
+        localStorage.setItem("allScores", JSON.stringify([{ key: name, score: finalScore }]))
     }
     else {
-        localScore.push({key: name, score: finalScore});
+        localScore.push({ key: name, score: finalScore });
         localStorage.setItem("allScores", JSON.stringify(localScore));
     }
     generateScoreboard();
@@ -267,7 +270,7 @@ function generateScoreboard() {
     var localOrderedScore = [];
     localScore = JSON.parse(localStorage.getItem("allScores"));
     //sorts score into descending order
-    localOrderedScore = localScore.sort(function(a, b){return (b.score - a.score)});
+    localOrderedScore = localScore.sort(function (a, b) { return (b.score - a.score) });
     for (let i = 0; i < localOrderedScore.length; i++) {
         var li = document.createElement("li");
         li.textContent = ((i + 1) + ". User " + localOrderedScore[i].key + " with " + localOrderedScore[i].score + " points");
@@ -280,7 +283,7 @@ function generateScoreboard() {
     //clear highscores button
     clearScores.style.visibility = "visible";
     clearScores.textContent = "Clear Highscores";
-    clearScores.addEventListener("click", function() {
+    clearScores.addEventListener("click", function () {
         localStorage.clear();
         scoreBoard.remove();
         clearScores.remove();
@@ -289,7 +292,7 @@ function generateScoreboard() {
     //restart quiz button
     restartQuiz.style.visibility = "visible";
     restartQuiz.textContent = "Restart Quiz";
-    restartQuiz.addEventListener("click", function() {
+    restartQuiz.addEventListener("click", function () {
         window.location.reload(false);
     });
 }
@@ -320,10 +323,10 @@ function viewHighScoresButton() {
     var localOrderedScore = [];
     localScore = JSON.parse(localStorage.getItem("allScores"));
     //sorts score into descending order
-    localOrderedScore = localScore.sort(function(a, b){return (b.score - a.score)});
+    localOrderedScore = localScore.sort(function (a, b) { return (b.score - a.score) });
     for (let i = 0; i < localOrderedScore.length; i++) {
         var li = document.createElement("li");
-        li.textContent = ("User " + localOrderedScore[i].key + " with " + localOrderedScore[i].score + " points");
+        li.textContent = ((i + 1) + ". User " + localOrderedScore[i].key + " with " + localOrderedScore[i].score + " points");
         li.setAttribute("data-index", i);
         li.classList.add("list-group-item");
         li.classList.add("list-group-item-action");
@@ -333,7 +336,7 @@ function viewHighScoresButton() {
     //clear highscores button
     clearScores.style.visibility = "visible";
     clearScores.textContent = "Clear Highscores";
-    clearScores.addEventListener("click", function() {
+    clearScores.addEventListener("click", function () {
         localStorage.clear();
         scoreBoard.remove();
         clearScores.remove();
@@ -342,7 +345,7 @@ function viewHighScoresButton() {
     //restart quiz button
     restartQuiz.style.visibility = "visible";
     restartQuiz.textContent = "Restart Quiz";
-    restartQuiz.addEventListener("click", function() {
+    restartQuiz.addEventListener("click", function () {
         window.location.reload(false);
     });
 }
