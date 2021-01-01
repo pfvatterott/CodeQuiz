@@ -17,16 +17,25 @@ Here are some key features:
 7. A scoreboard that orders the scores from highest to lowest.
 7. A button that will clear all highscores.
 8. A button that will restart the quiz.
+9. A score tracker so the user can see their current score while taking the quiz.
 
 ## Installation
 
 To view this website open up the index.html doc using your favorite web browser.
 
-[Click here to access the homepage](https://pfvatterott.github.io/CodeQuiz/)
+[Click here to access the Quiz](https://pfvatterott.github.io/CodeQuiz/)
 
 ## Screenshot of Main Page
 
-![screen shot](assets/images/screenshot.png)
+![Landing page screen shot](assets/images/startingpagescreenshot.png)
+
+## Question Example
+
+![Question Example](assets/images/questionexample.png)
+
+## Scoreboard Example
+
+![Scoreboard Example](assets/images/Scoreboard.png)
 
 ## Contributing
 
