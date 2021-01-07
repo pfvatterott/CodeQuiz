@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Title</title>
+  <title>JS Code Quiz</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,34 +15,32 @@
 
 <body>
   <div class="container-fluid">
-    <div class="jumbotron">
+    <main class="jumbotron">
       <header>
         <h2 id="topTimer"></h2>
         <h2 id="viewHighScores">View HighScores</h2>
       </header>
-      <h1 class="display-4">Let's Take A Quiz!</h1>
-      <p class="lead">There are 10 questions and a 60 second time limit. A correct answer is worth 10 points and all
-        leftover time will be added to your score</p>
-      <p class="lead">
-        <button id="startQuiz" type="button" class="btn btn-primary">Start Quiz</button>
-      <p class="questions"></p>
-      <ol id="fullList">
-        <li><button id="answer1" type="button" class="btn btn-primary"></button></li>
-        <li><button id="answer2" type="button" class="btn btn-primary"></button></li>
-        <li><button id="answer3" type="button" class="btn btn-primary"></button></li>
-        <li><button id="answer4" type="button" class="btn btn-primary"></button></li>
-      </ol>
-      </p>
-      <hr class="my-4 underAnswerLine">
-      <div class="answerResponseCorrect">Correct!</div>
-      <div class="answerResponseWrong">Wrong!</div>
-      <ol class="list-group" id="scoreBoard"></ol>
-      <div class="clearButton btn btn-primary">Clear Highscores</div>
-      <div class="restartButton btn btn-primary">Restart Quiz</div>
-
-
-    </div>
-
+      <section>
+        <h1 class="display-4">Let's Take A Quiz!</h1>
+        <p class="lead">There are 10 questions and a 60 second time limit. A correct answer is worth 10 points and all
+          leftover time will be added to your score</p>
+        <p class="lead">
+          <button id="startQuiz" type="button" class="btn btn-primary">Start Quiz</button>
+        <p class="questions"></p>
+        <ol id="fullList">
+          <li><button id="answer1" type="button" class="btn btn-primary"></button></li>
+          <li><button id="answer2" type="button" class="btn btn-primary"></button></li>
+          <li><button id="answer3" type="button" class="btn btn-primary"></button></li>
+          <li><button id="answer4" type="button" class="btn btn-primary"></button></li>
+        </ol>
+        <hr class="my-4 underAnswerLine">
+        <div class="answerResponseCorrect">Correct!</div>
+        <div class="answerResponseWrong">Wrong!</div>
+        <ol class="list-group" id="scoreBoard"></ol>
+        <button class="clearButton btn btn-primary">Clear Highscores</button>
+        <button class="restartButton btn btn-primary">Restart Quiz</button>
+      </section>
+    </main>
   </div>
 
   <!-- Optional JavaScript -->
