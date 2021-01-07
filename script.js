@@ -1,7 +1,6 @@
 //DOM elements
 var start = document.querySelector("#startQuiz");
 var mainEl = document.querySelector(".lead");
-var secondsLeft = 3;
 var headEl = document.querySelector(".display-4");
 var jumbo = document.querySelector(".jumbotron");
 var timerDisplay = document.getElementById("topTimer");
@@ -19,7 +18,7 @@ var answerResponseCorrect = document.querySelector(".answerResponseCorrect");
 var answerResponseWrong = document.querySelector(".answerResponseWrong");
 var underAnswerLine = document.querySelector(".underAnswerLine");
 
-//Hiding buttons
+//Hiding buttons and Elements
 answerList.style.visibility = "hidden";
 answer1.style.visibility = "hidden";
 answer2.style.visibility = "hidden";
@@ -32,7 +31,7 @@ answerResponseCorrect.style.display = "none";
 answerResponseWrong.style.display = "none";
 underAnswerLine.style.display = "none";
 
-//first page event listeners
+//First page event listeners
 start.addEventListener("click", firstTimer);
 viewHighScores.addEventListener("click", viewHighScoresButton);
 
@@ -122,6 +121,7 @@ var questionArray = [
 ]
 
 //Start Quiz Timer
+var secondsLeft = 3;
 function firstTimer() {
     var timerInterval = setInterval(function () {
         secondsLeft--;

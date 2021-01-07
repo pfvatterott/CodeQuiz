@@ -1,55 +1,60 @@
+/* General Formatting */
 .jumbotron {
-    padding-top: 10px;
+  padding-top: 10px;
 }
 
-
 .display-4 {
-    text-align: center;
-    padding-top: 50px;
+  text-align: center;
+  padding-top: 50px;
 }
 
 .lead {
-    text-align: center;
+  text-align: center;
 }
 
+/* Timer for quiz */
 #topTimer {
-    text-align: right;
-    font-size: 20px;
-    color: purple;
-    float: right;
+  text-align: right;
+  font-size: 20px;
+  color: purple;
+  float: right;
 }
 
+/* List of multiple choice answers */
 #fullList li {
-    padding: 5px;
+  padding: 5px;
 }
 
-.clearButton {
-    margin-top: 30px;
-    margin-right: 10px;
-}
-
-.restartButton {
-    margin-top: 30px;
-}
-
+/* Top left button to view highscores */
 #viewHighScores {
-    position: fixed;
-    text-align: left;
-    color: purple;
-    font-size: 20px;
-    padding-bottom: 50px;
+  position: fixed;
+  text-align: left;
+  color: purple;
+  font-size: 20px;
+  padding-bottom: 50px;
 }
 
 #viewHighScores:hover {
-    color: plum;
+  color: plum;
 }
 
+/* Notifications for correct or incorrect during quiz */
 .answerResponseCorrect {
-    color: green;
-    font-size: 20px;
+  color: green;
+  font-size: 20px;
 }
 
 .answerResponseWrong {
-    color: red;
-    font-size: 20px;
+  color: red;
+  font-size: 20px;
+}
+
+/* Buttons on Scoreboard Page */
+.clearButton {
+  margin-top: 30px;
+  margin-right: 10px;
+}
+
+.restartButton {
+  margin-top: 30px;
 }
